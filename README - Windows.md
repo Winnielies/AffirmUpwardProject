@@ -9,7 +9,10 @@ $ venv/Scripts/activate
 (venv) $ pip install -r requirements.txt
 (venv) $ python setup.py develop -N
 ```
-
+Note that newer version of Python no longer supports collections. Replace instances of collections with _collections_abc which are found in:
+nose/suite.py
+nose/case.py
+connexion/json_schema.py
 
 **Ensure your tests run**. You must be in the server directory for this.
 
@@ -17,11 +20,14 @@ $ venv/Scripts/activate
 (venv) $ nosetests --nologcapture loan_application/tests/
 .........
 ---------------------------------------------------------------------
-Ran 7 tests in 0.0XXs
+Ran 7 tests in 0.060s
 
 OK
 ```
-
+if nosetests ran 0 tests in 0.000 secs
+Create a "setup.cfg" file at the root directory that contains the following code:
+[nosetests]
+traverse-namespace=1
 
 **Run the Server and access the Open API v3.0 Portal**
 ```python
